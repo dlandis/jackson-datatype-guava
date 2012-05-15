@@ -12,9 +12,7 @@ public abstract class BaseTest extends junit.framework.TestCase
     
     protected ObjectMapper mapperWithModule()
     {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new GuavaModule());
-        return mapper;
+        return new ObjectMapper().registerModule(new GuavaModule());
     }
 
     protected void verifyException(Throwable e, String... matches)

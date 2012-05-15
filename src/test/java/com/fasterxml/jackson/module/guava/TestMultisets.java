@@ -1,9 +1,8 @@
 package com.fasterxml.jackson.module.guava;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-
-import com.fasterxml.jackson.databind.*;
-
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 
@@ -63,8 +62,9 @@ public class TestMultisets extends BaseTest
 
     public void testDeserializers() throws Exception
     {
-        ObjectMapper mapper = mapperWithModule();
-        Multiset<String> set = mapper.readValue("[\"abc\",\"abc\",\"foo\"]", new TypeReference<Multiset<String>>() { });
+        final ObjectMapper mapper = mapperWithModule();
+        
+        final Multiset<String> set = mapper.readValue("[\"abc\",\"abc\",\"foo\"]", new TypeReference<Multiset<String>>() { });
         assertEquals(3, set.size());
         assertEquals(1, set.count("foo"));
         assertEquals(2, set.count("abc"));
